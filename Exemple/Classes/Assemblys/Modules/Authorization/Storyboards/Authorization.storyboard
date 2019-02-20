@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Authorization View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="AuthorizationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="AuthorizationViewController" customModule="Exemple" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authorization" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ctk-X8-bTH">
+                                <rect key="frame" x="136.5" y="323" width="102" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CF5-xg-zST">
+                                <rect key="frame" x="127.5" y="372" width="120" height="40"/>
+                                <color key="backgroundColor" red="0.13634876230936666" green="0.80741985103626945" blue="0.075933244793825849" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="7Cu-SD-BXZ"/>
+                                    <constraint firstAttribute="width" constant="120" id="ebI-eS-fxJ"/>
+                                </constraints>
+                                <state key="normal" title="Registration">
+                                    <color key="titleColor" red="0.99418604649999998" green="0.98837209299999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="registrationButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eoi-Ba-8I4"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="CF5-xg-zST" firstAttribute="top" secondItem="Ctk-X8-bTH" secondAttribute="bottom" constant="28" id="60o-kO-c9D"/>
+                            <constraint firstItem="Ctk-X8-bTH" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="D2Y-A4-ri9"/>
+                            <constraint firstItem="CF5-xg-zST" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Fv9-ha-mOP"/>
+                            <constraint firstItem="Ctk-X8-bTH" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="VWf-R2-NPo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="9f1-BB-wnl">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="yKT-cs-cJd">
+                            <connections>
+                                <action selector="cancelButtonAction:" destination="BYZ-38-t0r" id="7gD-3u-xxx"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Login" id="7MU-WG-vrG">
+                            <connections>
+                                <action selector="loginButtonAction:" destination="BYZ-38-t0r" id="fk7-lE-f9I"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-343.19999999999999" y="107.49625187406298"/>
+        </scene>
+    </scenes>
+</document>
