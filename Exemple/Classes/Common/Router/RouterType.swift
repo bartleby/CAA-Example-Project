@@ -2,8 +2,8 @@
 //  RouterType.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,8 @@ protocol RouterType: Presentable {
     var rootViewController: UIViewController? { get }
     
     func present(_ module: Presentable)
-    func present(_ module: Presentable, animated: Bool)
+    func present(_ module: Presentable, style: UIModalPresentationStyle)
+    func present(_ module: Presentable, animated: Bool, style: UIModalPresentationStyle)
     
     func push(_ module: Presentable)
     func push(_ module: Presentable, hideBottomBar: Bool)

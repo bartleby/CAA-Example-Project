@@ -2,8 +2,8 @@
 //  RegistrationAssembly.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import UIKit
@@ -11,13 +11,18 @@ import UIKit
 typealias RegistrationModule = Module<RegistrationModuleInput, RegistrationModuleOutput>
 
 class RegistrationAssembly: Assembly {
-    func build() -> RegistrationModule {
-        
+    func build(coordinator: CoordinatorType) -> RegistrationModule {
         // View
-        let view = RegistrationViewController.controllerFromStoryboard(.registration)
+        let view = RegistrationViewController.controllerFromStoryboard("Registration")
+        
+        // Interactor
+        let interactor = RegistrationInteractor()
+        
+        // Router
+        let router = RegistrationRouter(coordinator: coordinator)
         
         // Presenter
-        let presenter = RegistrationPresenter()
+        let presenter = RegistrationPresenter(interactor: interactor, router: router)
         
         // Dependency Setup
         presenter.view = view

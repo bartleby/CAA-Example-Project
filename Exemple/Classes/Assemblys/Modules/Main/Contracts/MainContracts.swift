@@ -1,9 +1,9 @@
 //
-//  MainProtocols.swift
+//  MainContracts.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import UIKit
@@ -14,16 +14,26 @@ protocol MainModuleInput {
 }
 
 // Module Output
-protocol MainModuleOutput {
+protocol MainModuleOutput: ModuleOutput {
     
 }
 
 // View Input
 protocol MainViewInput: AnyObject {
-    
+    func set(title: String)
 }
 
 // View Output
 protocol MainViewOutput: AnyObject {
     func viewDidLoad()
+}
+
+// Interactor
+protocol MainInteractorInput {
+
+}
+
+// Router
+protocol MainRouterProtocol: AlertRoutable {
+
 }

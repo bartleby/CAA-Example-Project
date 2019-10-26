@@ -2,8 +2,8 @@
 //  RegistrationViewController.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import UIKit
@@ -17,9 +17,21 @@ class RegistrationViewController: UIViewController, RegistrationViewInput {
     }
 }
 
+// MARK: - Configure
+extension RegistrationViewController {
+    
+}
+
+// MARK: View Input
+extension RegistrationViewController {
+    func set(title: String) {
+        self.title = title
+    }
+}
+
 // MARK: Button Action
 extension RegistrationViewController {
-    @IBAction func registerButtonAction(_ sender: Any) {
-        output.registerButtonDidTap()
+    @IBAction func registerButtonAction(_ sender: Any?) {
+        output.registerDidTap()
     }
 }

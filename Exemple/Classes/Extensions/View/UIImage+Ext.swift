@@ -2,18 +2,18 @@
 //  UIImage+Ext.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import UIKit
 
-public extension UIImage {
+extension UIImage {
     
     /**
      Returns image with size 1x1px of certain color.
      */
-    public class func imageWithColor(_ color: UIColor) -> UIImage {
+    class func imageWithColor(_ color: UIColor) -> UIImage {
         let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
@@ -31,7 +31,7 @@ public extension UIImage {
      Returns current image colored to certain color.
      */
     //@available(*, deprecated, message: "Use similar build-in XCAssetCatalog functionality.")
-    public func imageWithColor(_ color: UIColor) -> UIImage {
+    func imageWithColor(_ color: UIColor) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
         
         let context = UIGraphicsGetCurrentContext()
@@ -51,7 +51,7 @@ public extension UIImage {
         return newImage!
     }
     
-    public func resize(newWidth: CGFloat) -> UIImage? {
+    func resize(newWidth: CGFloat) -> UIImage? {
         
         let scale = newWidth / self.size.width
         let newHeight = self.size.height * scale

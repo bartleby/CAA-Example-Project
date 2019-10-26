@@ -2,8 +2,8 @@
 //  AuthorizationAssembly.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import UIKit
@@ -11,13 +11,18 @@ import UIKit
 typealias AuthorizationModule = Module<AuthorizationModuleInput, AuthorizationModuleOutput>
 
 class AuthorizationAssembly: Assembly {
-    func build() -> AuthorizationModule {
-        
+    func build(coordinator: CoordinatorType) -> AuthorizationModule {
         // View
-        let view = AuthorizationViewController.controllerFromStoryboard(.auth)
+        let view = AuthorizationViewController.controllerFromStoryboard("Authorization")
+        
+        // Interactor
+        let interactor = AuthorizationInteractor()
+        
+        // Router
+        let router = AuthorizationRouter(coordinator: coordinator)
         
         // Presenter
-        let presenter = AuthorizationPresenter()
+        let presenter = AuthorizationPresenter(interactor: interactor, router: router)
         
         // Dependency Setup
         presenter.view = view

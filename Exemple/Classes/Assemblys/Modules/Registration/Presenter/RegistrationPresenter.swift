@@ -2,14 +2,13 @@
 //  RegistrationPresenter.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import Foundation
 
-class RegistrationPresenter: RegistrationModuleOutput {
-    var onRegistrationCompleted: ((String) -> Void)?
+class RegistrationPresenter: BasePresenter<RegistrationInteractorInput, RegistrationRouterProtocol>, RegistrationModuleOutput {
     
     // MARK: - Weak properties
     weak var view: RegistrationViewInput?
@@ -28,10 +27,10 @@ extension RegistrationPresenter: RegistrationModuleInput {
 // MARK: View Output
 extension RegistrationPresenter: RegistrationViewOutput {
     func viewDidLoad() {
-        
+        view?.set(title: "Registration")
     }
     
-    func registerButtonDidTap() {
-        onRegistrationCompleted?("Registration token")
+    func registerDidTap() {
+        router.dismiss()
     }
 }

@@ -1,9 +1,9 @@
 //
-//  RegistrationProtocols.swift
+//  RegistrationContracts.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import Foundation
@@ -15,16 +15,25 @@ protocol RegistrationModuleInput {
 
 // Module Output
 protocol RegistrationModuleOutput {
-    var onRegistrationCompleted: ((String) -> Void)? { set get }
-}
-
-// View Input
-protocol RegistrationViewInput: AnyObject {
     
 }
 
+// View Input
+protocol RegistrationViewInput: class {
+    func set(title: String)
+}
+
 // View Output
-protocol RegistrationViewOutput: AnyObject {
+protocol RegistrationViewOutput: class {
     func viewDidLoad()
-    func registerButtonDidTap()
+    func registerDidTap()
+}
+
+// Interactor
+protocol RegistrationInteractorInput {
+}
+
+// Router
+protocol RegistrationRouterProtocol: AlertRoutable {
+    func dismiss()
 }

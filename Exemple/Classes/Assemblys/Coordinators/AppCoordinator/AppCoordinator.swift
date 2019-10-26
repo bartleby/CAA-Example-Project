@@ -2,29 +2,21 @@
 //  AppCoordinator.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import Foundation
 
 class AppCoordinator: BaseCoordinator, AppCoordinatorType {
-    private var onboardingWasShown: Bool {
-        set { appConfig.setConfig(value: newValue, for: .onboardingWasShown) }
-        get { return appConfig.obtainConfig(for: .onboardingWasShown) }
-    }
-    
-    private var authToken: String {
-        set { appConfig.setConfig(value: newValue, for: .authToken) }
-        get { return appConfig.obtainConfig(for: .authToken) }
-    }
-    
-    private lazy var appConfig: AppConfigServiceType = {
+    private var config: AppConfigServiceType {
         return container.resolve(AppConfigServiceAssembly.self).build()
-    }()
+    }
     
     private var instructor: LaunchInstructor {
-        return LaunchInstructor.configure(tutorialWasShown: onboardingWasShown, isAutorized: !authToken.isEmpty)
+        let tutorialWasShown: Bool = config.obtain(for: .onboardingWasShown)
+        let autorizedToken: String = config.obtain(for: .authToken)
+        return LaunchInstructor.configure(tutorialWasShown: tutorialWasShown, isAutorized: !autorizedToken.isEmpty)
     }
     
     override func start(with option: DeepLinkOption?) {
@@ -46,45 +38,41 @@ class AppCoordinator: BaseCoordinator, AppCoordinatorType {
 // MARK: Main Flow
 extension AppCoordinator {
     func startMainFlow() {
-        let mainCoordinator = container.resolve(MainCoordinatorAssembly.self).build(router: router)
-        addChild(mainCoordinator)
-        mainCoordinator.start()
-        
-        self.router.setRootModule(mainCoordinator)
+        let coordinator = container.resolve(TabBarCoordinatorAssembly.self).build()
+        addChild(coordinator)
+        coordinator.start()
+        self.router.setRootModule(coordinator, hideBar: true)
     }
 }
 
 // MARK: Auth Flow
 extension AppCoordinator {
     func startAuthFlow() {
-        let authCoordinator = container.resolve(AuthCoordinatorAssembly.self).build()
-        authCoordinator.onAuthCanceled = { [weak self, weak authCoordinator] in
-            self?.removeChild(authCoordinator)
+        let coordinator = container.resolve(AuthorizationCoordinatorAssembly.self).build()
+        coordinator.completion = { [weak self, weak coordinator] in
+            self?.removeChild(coordinator)
             self?.router.dismissModule()
+            self?.config.set(value: "token", for: .authToken)
             self?.start()
         }
-        
-        authCoordinator.onAuthCompleted = { [weak self, weak authCoordinator] token in
-            self?.authToken = token
-            self?.removeChild(authCoordinator)
-            self?.router.dismissModule()
-            self?.start()
-        }
-        
-        addChild(authCoordinator)
-        authCoordinator.start()
-        self.router.present(authCoordinator)
+        addChild(coordinator)
+        coordinator.start()
+        self.router.present(coordinator)
     }
 }
 
 // MARK: Onboarding Flow
 extension AppCoordinator {
     func startOnboardingFlow() {
-        var onboardingModule = container.resolve(OnboardingAssembly.self).build()
-        onboardingModule.output.onCompleted = { [weak self] in
-            self?.onboardingWasShown = true
+        let coordinator = container.resolve(OnboardingCoordinatorAssembly.self).build()
+        coordinator.completion = { [weak self, weak coordinator] in
+            self?.removeChild(coordinator)
+            self?.router.dismissModule()
+            self?.config.set(value: true, for: .onboardingWasShown)
             self?.start()
         }
-        router.setRootModule(onboardingModule, hideBar: true)
+        addChild(coordinator)
+        coordinator.start()
+        self.router.present(coordinator)
     }
 }

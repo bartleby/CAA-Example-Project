@@ -2,17 +2,13 @@
 //  AuthorizationPresenter.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import Foundation
 
-class AuthorizationPresenter: AuthorizationModuleOutput {
-    
-    var onAuthCanceled: (() -> Void)?
-    var onAuthCompleted: ((String) -> Void)?
-    var onRegistrationCompleted: (() -> Void)?
+class AuthorizationPresenter: BasePresenter<AuthorizationInteractorInput, AuthorizationRouterProtocol>, AuthorizationModuleOutput {
     
     // MARK: - Weak properties
     weak var view: AuthorizationViewInput?
@@ -30,21 +26,15 @@ extension AuthorizationPresenter: AuthorizationModuleInput {
 
 // MARK: View Output
 extension AuthorizationPresenter: AuthorizationViewOutput {
-    
     func viewDidLoad() {
-        
+        view?.set(title: "Authorization")
     }
     
-    func authButtonDidTap() {
-        onAuthCompleted?("auth token")
+    func loginDidTap() {
+        router.dismiss()
     }
     
-    func cancelButtonDidTap() {
-        onAuthCanceled?()
+    func registrationDidTap() {
+        router.showRegistration()
     }
-    
-    func registrationButtonDidTap() {
-        onRegistrationCompleted?()
-    }
-    
 }

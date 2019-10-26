@@ -2,14 +2,16 @@
 //  MainCoordinatorAssembly.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class MainCoordinatorAssembly: Assembly {
-    func build(router: RouterType) -> MainCoordinatorType {
+    func build() -> MainCoordinatorType {
+        let navigationController = UINavigationController(rootViewController: UIViewController())
+        let router = Router(navigationController: navigationController)
         let coordinator = MainCoordinator(container: container, router: router)
         return coordinator
     }

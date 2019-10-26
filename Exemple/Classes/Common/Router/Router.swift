@@ -2,8 +2,8 @@
 //  Router.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import UIKit
@@ -29,12 +29,18 @@ final class Router: NSObject, RouterType {
         self.navigationController.delegate = self
     }
     
-    func present(_ module: Presentable) {
-        present(module, animated: true)
+    func present(_ module: Presentable)  {
+        present(module, style: .overFullScreen)
     }
     
-    func present(_ module: Presentable, animated: Bool) {
-        navigationController.present(module.toPresent(), animated: animated, completion: nil)
+    func present(_ module: Presentable, style: UIModalPresentationStyle) {
+        present(module, animated: true, style: style)
+    }
+    
+    func present(_ module: Presentable, animated: Bool, style: UIModalPresentationStyle) {
+        let controller = module.toPresent()
+        controller.modalPresentationStyle = style
+        navigationController.present(controller, animated: animated, completion: nil)
     }
     
     func dismissModule() {

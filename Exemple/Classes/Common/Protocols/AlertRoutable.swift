@@ -1,20 +1,26 @@
 //
-//  AlertCoordinable.swift
+//  AlertRoutable.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import UIKit
 
-protocol AlertCoordinable: CoordinatorType, Presentable {
+protocol AlertRoutable: Presentable {
     typealias AlertTextFieldHandler = (UITextField) -> Void
     
     func showAlert(title: String, message: String)
     func showAllert(config: AlertConfiguration, style: UIAlertController.Style)
-    func showAlertWithTextField(title: String, message: String, placeholder: String,
-                                handler: @escaping AlertTextFieldHandler)
+    func showAlertWithTextField(configuration: TextFieldAlertConfiguration)
+}
+
+struct TextFieldAlertConfiguration {
+    let title: String?
+    var message: String?
+    var placeholder: String?
+    var handler: AlertRoutable.AlertTextFieldHandler
 }
 
 struct AlertConfiguration {
@@ -42,7 +48,7 @@ struct AlertConfiguration {
     }
 }
 
-extension AlertCoordinable {
+extension AlertRoutable {
     func showAlert(title: String, message: String) {
         let source = toPresent()
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -52,19 +58,18 @@ extension AlertCoordinable {
         
     }
     
-    func showAlertWithTextField(title: String, message: String, placeholder: String,
-                                handler: @escaping AlertTextFieldHandler) {
+    func showAlertWithTextField(configuration: TextFieldAlertConfiguration) {
         
         let source = toPresent()
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: configuration.title, message: configuration.message, preferredStyle: .alert)
         
         alertController.addTextField { (textField) in
-            textField.placeholder = placeholder
+            textField.placeholder = configuration.placeholder
         }
         
         let completeAction = UIAlertAction(title: "OK", style: .default, handler: { [weak alertController] (action) -> Void in
             if let textField = alertController?.textFields![0] {
-                handler(textField)
+                configuration.handler(textField)
             }
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -83,7 +88,6 @@ extension AlertCoordinable {
         })
         let source = toPresent()
         source.present(alertController, animated: true, completion: config.completion)
-        
     }
 }
 

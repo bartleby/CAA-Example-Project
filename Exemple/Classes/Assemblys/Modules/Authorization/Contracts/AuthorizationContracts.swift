@@ -1,9 +1,9 @@
 //
-//  AuthorizationProtocols.swift
+//  AuthorizationContracts.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import Foundation
@@ -15,21 +15,27 @@ protocol AuthorizationModuleInput {
 
 // Module Output
 protocol AuthorizationModuleOutput {
-    var onAuthCanceled: (() -> Void)? { get set }
-    var onAuthCompleted: ((String) -> Void)? { get set }
-    var onRegistrationCompleted: (() -> Void)? { get set }
+    
 }
 
 // View Input
-protocol AuthorizationViewInput: AnyObject {
-    
+protocol AuthorizationViewInput: class {
+    func set(title: String)
 }
 
 // View Output
-protocol AuthorizationViewOutput: AnyObject {
+protocol AuthorizationViewOutput: class {
     func viewDidLoad()
-    
-    func authButtonDidTap()
-    func cancelButtonDidTap()
-    func registrationButtonDidTap()
+    func loginDidTap()
+    func registrationDidTap()
+}
+
+// Interactor
+protocol AuthorizationInteractorInput {
+}
+
+// Router
+protocol AuthorizationRouterProtocol: AlertRoutable {
+    func dismiss()
+    func showRegistration()
 }

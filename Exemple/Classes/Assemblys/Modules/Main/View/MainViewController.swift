@@ -2,8 +2,8 @@
 //  MainViewController.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import UIKit
@@ -14,6 +14,18 @@ class MainViewController: UIViewController, MainViewInput {
     override func viewDidLoad() {
         super.viewDidLoad()
         output.viewDidLoad()
+    }
+}
+
+// MARK: - Configure
+extension MainViewController {
+    
+}
+
+// MARK: View Input
+extension MainViewController {
+    func set(title: String) {
+        self.title = title
     }
 }
 

@@ -2,8 +2,8 @@
 //  ObjectKey.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import Foundation
@@ -25,8 +25,8 @@ internal struct ObjectKey {
 
 // MARK: Hashable
 extension ObjectKey: Hashable {
-    var hashValue: Int {
-        return String(describing: objectType).hashValue ^ (name?.hashValue ?? 0)
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(String(describing: objectType).hashValue ^ (name?.hashValue ?? 0))
     }
 }
 

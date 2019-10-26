@@ -2,15 +2,15 @@
 //  AppDelegate.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: AppDelegateManager {
-    var window: UIWindow? = UIWindow()
+    var window: UIWindow?
     
     lazy var container: DependencyContainer = {
         let factory = AssemblyFactory()
@@ -19,13 +19,17 @@ class AppDelegate: AppDelegateManager {
         // Setup Coordinators
         container.apply(AppCoordinatorAssembly.self)
         container.apply(MainCoordinatorAssembly.self)
-        container.apply(AuthCoordinatorAssembly.self)
+        container.apply(SettingsCoordinatorAssembly.self)
+        container.apply(TabBarCoordinatorAssembly.self)
+        container.apply(AuthorizationCoordinatorAssembly.self)
+        container.apply(OnboardingCoordinatorAssembly.self)
         
         // Setup Modules
         container.apply(MainAssembly.self)
+        container.apply(SettingsAssembly.self)
         container.apply(AuthorizationAssembly.self)
-        container.apply(RegistrationAssembly.self)
         container.apply(OnboardingAssembly.self)
+        container.apply(RegistrationAssembly.self)
         
         // Setup Services
         container.apply(AppConfigServiceAssembly.self)
@@ -41,3 +45,4 @@ class AppDelegate: AppDelegateManager {
         ]
     }
 }
+

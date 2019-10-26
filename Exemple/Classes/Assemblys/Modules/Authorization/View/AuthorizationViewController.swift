@@ -2,8 +2,8 @@
 //  AuthorizationViewController.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import UIKit
@@ -13,21 +13,33 @@ class AuthorizationViewController: UIViewController, AuthorizationViewInput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureNavigationBar()
         output.viewDidLoad()
+    }
+}
+
+// MARK: - Configure
+extension AuthorizationViewController {
+    func configureNavigationBar() {
+        let loginButton = UIBarButtonItem(title: "login", style: .done, target: self, action: #selector(loginButtonAction(_:)))
+        navigationItem.rightBarButtonItem = loginButton
+    }
+}
+
+// MARK: View Input
+extension AuthorizationViewController {
+    func set(title: String) {
+        self.title = title
     }
 }
 
 // MARK: Button Action
 extension AuthorizationViewController {
-    @IBAction func cancelButtonAction(_ sender: Any) {
-        output.cancelButtonDidTap()
+    @objc func loginButtonAction(_ sender: Any?) {
+        output.loginDidTap()
     }
     
-    @IBAction func loginButtonAction(_ sender: Any) {
-        output.authButtonDidTap()
-    }
-    
-    @IBAction func registrationButtonAction(_ sender: Any) {
-        output.registrationButtonDidTap()
+    @IBAction func registrationButtonAction(_ sender: Any?) {
+        output.registrationDidTap()
     }
 }

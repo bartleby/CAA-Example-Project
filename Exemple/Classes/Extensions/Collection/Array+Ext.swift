@@ -2,23 +2,18 @@
 //  Array+Ext.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import Foundation
 
-public extension Array {
-    
-    public var isEmpty: Bool {
-        return count == 0
-    }
-    
-    public var isNotEmpty: Bool {
+extension Array {
+    var isNotEmpty: Bool {
         return !isEmpty
     }
     
-    public mutating func removeObject<U: Equatable>(_ object: U) {
+    mutating func removeObject<U: Equatable>(_ object: U) {
         var index: Int?
         
         for (idx, objectToCompare) in self.enumerated() {
@@ -34,7 +29,7 @@ public extension Array {
         }
     }
     
-    public mutating func removeElement<U: AnyObject>(_ element: U) {
+    mutating func removeElement<U: AnyObject>(_ element: U) {
         var index: Int?
         
         for (idx, objectToCompare) in self.enumerated() {

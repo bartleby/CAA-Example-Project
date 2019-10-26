@@ -1,9 +1,9 @@
 //
-//  ApplicationPlugin.swift
+//  ApplicationService.swift
 //  Exemple
 //
-//  Created by bart on 17/02/2019
-//  Copyright © 2019 idevs. All rights reserved.
+//  Created by Bart on 26.10.2019
+//  Copyright © 2019 iDevs.io. All rights reserved.
 //
 
 import UIKit
@@ -13,7 +13,7 @@ class ApplicationService: NSObject, AppDelegateService {
     let container: DependencyContainer
     
     lazy var appCoordinator: AppCoordinatorType = {
-        return container.resolve(AppCoordinatorAssembly.self).build()
+        return self.container.resolve(AppCoordinatorAssembly.self).build()
     }()
     
     init(container: DependencyContainer, window: UIWindow?) {
@@ -31,6 +31,7 @@ class ApplicationService: NSObject, AppDelegateService {
         appConfig.registerDefaults()
         
         // Setup window
+        window = UIWindow()
         window?.rootViewController = appCoordinator.toPresent()
         window?.backgroundColor = .white
         window?.makeKeyAndVisible()
@@ -39,6 +40,8 @@ class ApplicationService: NSObject, AppDelegateService {
         let notification = launchOptions?[.remoteNotification] as? [String: AnyObject]
         let deepLink = DeepLinkOption.build(with: notification)
         appCoordinator.start(with: deepLink)
+        
+        //printAllAvailableFonts()
         
         return true
     }
