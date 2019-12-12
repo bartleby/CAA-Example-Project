@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol OnboardingCoordinatorType: CoordinatorType, Presentable {
+protocol OnboardingCoordinatorType: CoordinatorType {
 	
 }

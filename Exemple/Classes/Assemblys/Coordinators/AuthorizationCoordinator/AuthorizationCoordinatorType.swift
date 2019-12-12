@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol AuthorizationCoordinatorType: CoordinatorType, Presentable {
+protocol AuthorizationCoordinatorType: CoordinatorType {
 	
 }
