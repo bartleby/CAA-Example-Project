@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol TabBarCoordinatorType: CoordinatorType, Presentable {
+protocol TabBarCoordinatorType: CoordinatorType {
 	
 }
